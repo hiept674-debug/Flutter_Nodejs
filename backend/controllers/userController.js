@@ -31,12 +31,21 @@ exports.signup = (req, res) => {
 
 // LOGIN
 exports.login = (req, res) => {
-  const { email, password } = req.body;
+  let { email, password } = req.body;
+
+  email = email.trim();
+  password = password.trim();
+
+  console.log("LOGIN:", email, password);
 
   const user = User.getByEmail(email);
 
-  if (!user || user.password !== password) {
-    return res.status(401).json({ message: "Invalid credentials" });
+  if (!user) {
+    return res.status(401).json({ message: "Email not found" });
+  }
+
+  if (user.password !== password) {
+    return res.status(401).json({ message: "Wrong password" });
   }
 
   res.json({

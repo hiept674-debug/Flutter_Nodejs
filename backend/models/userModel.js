@@ -1,17 +1,27 @@
 let users = [];
+let id = 1;
 
-const UserModel = {
-  getAll: () => users,
-
-  getById: (id) => users.find(u => u.id === id),
-
-  getByEmail: (email) => users.find(u => u.email === email),
-
-  create: (user) => {
-    user.id = users.length + 1;
-    users.push(user);
-    return user;
+class User {
+  static getAll() {
+    return users;
   }
-};
 
-module.exports = UserModel;
+  static getByEmail(email) {
+    return users.find(u => u.email === email);
+  }
+
+  static create(data) {
+    const newUser = {
+      id: id++,
+      ...data
+    };
+
+    users.push(newUser);
+
+    console.log("USER SAVED:", users);
+
+    return newUser;
+  }
+}
+
+module.exports = User;
