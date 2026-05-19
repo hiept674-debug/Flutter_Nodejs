@@ -43,8 +43,8 @@ class _MyTripsPageState extends State<MyTripsPage> {
         },
       );
 
-      print("STATUS: ${response.statusCode}");
-      print("BODY: ${response.body}");
+      debugPrint("STATUS: ${response.statusCode}");
+      debugPrint("BODY: ${response.body}");
 
       final data = jsonDecode(response.body);
 
@@ -58,10 +58,10 @@ class _MyTripsPageState extends State<MyTripsPage> {
           isLoading = false;
         });
 
-        print(data["message"]);
+        debugPrint(data["message"].toString());
       }
     } catch (e) {
-      print("ERROR: $e");
+      debugPrint("ERROR: $e");
 
       setState(() {
         isLoading = false;
@@ -93,7 +93,7 @@ class _MyTripsPageState extends State<MyTripsPage> {
                 fit: StackFit.expand,
                 children: [
                   Image.asset('assets/images/a.jpg', fit: BoxFit.cover),
-                  Container(color: Colors.black.withOpacity(0.2)),
+                  Container(color: Colors.black.withValues(alpha: 0.2)),
                 ],
               ),
             ),
@@ -183,7 +183,7 @@ class _MyTripsPageState extends State<MyTripsPage> {
         borderRadius: BorderRadius.circular(20),
         color: Colors.white,
         boxShadow: [
-          BoxShadow(color: Colors.grey.withOpacity(0.2), blurRadius: 10),
+          BoxShadow(color: Colors.grey.withValues(alpha: 0.2), blurRadius: 10),
         ],
       ),
 

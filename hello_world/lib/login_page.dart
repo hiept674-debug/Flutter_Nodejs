@@ -5,6 +5,7 @@ import 'forgot_password_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:flutter/foundation.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -37,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
         }),
       );
 
-      print(response.body);
+      debugPrint(response.body);
 
       final data = jsonDecode(response.body);
 
@@ -48,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
         SharedPreferences prefs = await SharedPreferences.getInstance();
 
         await prefs.setString("token", data["token"]);
-
+        if (!mounted) return;
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (_) => const MyTripsPage()),
@@ -59,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
         });
       }
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
 
       setState(() {
         error = "Không kết nối server";

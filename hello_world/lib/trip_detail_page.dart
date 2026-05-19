@@ -38,9 +38,8 @@ class _TripDetailPageState extends State<TripDetailPage> {
         },
       );
 
-      print("DETAIL STATUS: ${response.statusCode}");
-
-      print("DETAIL BODY: ${response.body}");
+      debugPrint("DETAIL STATUS: ${response.statusCode}");
+      debugPrint("DETAIL BODY: ${response.body}");
 
       final data = jsonDecode(response.body);
 
@@ -57,7 +56,7 @@ class _TripDetailPageState extends State<TripDetailPage> {
         });
       }
     } catch (e) {
-      print("DETAIL ERROR: $e");
+      debugPrint("DETAIL ERROR: $e");
 
       setState(() {
         isLoading = false;
