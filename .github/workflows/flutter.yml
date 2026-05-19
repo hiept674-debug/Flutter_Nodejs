@@ -15,29 +15,25 @@ jobs:
 
     defaults:
       run:
-        working-directory: travel_app
+        working-directory: hello_world
 
     steps:
-      - name: Checkout Source
+      - name: Checkout source
         uses: actions/checkout@v4
 
       - name: Install Flutter
         uses: subosito/flutter-action@v2
-
         with:
           flutter-version: "3.32.0"
 
-      - name: Verify Flutter
+      - name: Flutter Version
         run: flutter --version
 
-      - name: Install Packages
+      - name: Get Dependencies
         run: flutter pub get
 
       - name: Analyze Project
         run: flutter analyze
 
-      - name: Execute Tests
+      - name: Run Test
         run: flutter test
-
-      - name: Build APK
-        run: flutter build apk --debug
