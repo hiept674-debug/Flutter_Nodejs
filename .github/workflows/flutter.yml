@@ -1,0 +1,43 @@
+name: Flutter CI
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  flutter-build:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: travel_app
+
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+
+        with:
+          flutter-version: "3.32.0"
+
+      - name: Verify Flutter
+        run: flutter --version
+
+      - name: Install Packages
+        run: flutter pub get
+
+      - name: Analyze Project
+        run: flutter analyze
+
+      - name: Execute Tests
+        run: flutter test
+
+      - name: Build APK
+        run: flutter build apk --debug
